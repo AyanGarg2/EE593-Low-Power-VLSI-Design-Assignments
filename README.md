@@ -1,4 +1,4 @@
-This repository contains lab assignments for  EE593:Low Power VLSI Design(IIT Mandi). 
+# This repository contains lab assignments for  EE593:Low Power VLSI Design(IIT Mandi). 
 
 ## Assignment 1: Design and analysis of a CMOS inverter, including:
 1. Switching threshold estimation through DC VTC analysis. 
