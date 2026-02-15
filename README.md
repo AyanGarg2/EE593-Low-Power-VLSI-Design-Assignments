@@ -31,8 +31,6 @@ Design a 6-input AND/OR gate using:
 - **Implementation-B:** 3-input NAND/NOR + 2-input NAND/NOR  
 - **Implementation-C:** 2-input NAND/NOR + 3-input NAND/NOR  
 
----
-
 ### Work Done
 
 #### 1. Area, Delay, and Power Analysis
