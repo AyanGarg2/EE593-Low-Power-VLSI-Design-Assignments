@@ -1,0 +1,416 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage[font=small]{caption}
+
+\graphicspath{{.}}
+\sisetup{round-mode=places,round-precision=3}
+
+\usepackage{float}
+\begin{document}
+
+\title{Design and Analysis of 6-Input CMOS AND/OR Gate Using Multi-Stage NAND/NOR Implementations}
+
+
+\author{
+    \IEEEauthorblockA{Ayan Garg (B23484) *, Achal Shah (T25119) †,Krishna Gorai (T25111) ‡}
+* b23484@students.iitmandi.ac.in \\
+† t25119@students.iitmandi.ac.in \\
+‡ t25111@students.iitmandi.ac.in}
+\maketitle
+
+
+\section{6-input AND/OR Gate Implementations}
+
+\subsection{AND Implementation-A (6-input NAND + Inverter)}
+
+A single 6-input NAND gate is used:
+\[
+X = \overline{ABCDEF}.
+\]
+
+The output is then inverted:
+\[
+out = \overline{X}
+     = \overline{\overline{ABCDEF}}
+     = ABCDEF.
+\]
+
+Thus, a 6-input NAND followed by an inverter
+realizes the 6-input AND function.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{6_input_AND_gate.eps}
+\caption{AND Implementation-A: 6-input AND using 6-input NAND followed by an inverter.}
+\label{fig:and_impl_a}
+\end{figure}
+
+\subsection{AND Implementation-B (3-input NAND + 2-input NAND)}
+
+Inputs are grouped into two 3-input NAND gates:
+\[X_1 = \overline{ABC}, \qquad
+X_2 = \overline{DEF}.\]
+
+The final stage is a 2-input NAND:
+\[
+out = \overline{X_1 X_2}
+     = \overline{(\overline{ABC})(\overline{DEF})}
+     = ABCDEF.
+\]
+
+Thus, two 3-input NAND gates followed by one 2-input NAND
+realize the 6-input AND function.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{6_input_AND_using_3_input_NAND_figure.eps}
+\caption{AND Implementation-B: 6-input AND using 3-input NAND and 2-input NAND decomposition.}
+\label{fig:and_impl_b}
+\end{figure}
+
+\subsection{AND Implementation-C (2-input NAND + 3-input NAND)}
+
+Inputs are first paired using three 2-input NAND gates:
+\[
+X_1 = \overline{AB}, \qquad
+X_2 = \overline{CD}, \qquad
+X_3 = \overline{EF}.
+\]
+
+The final stage is a 3-input NAND:
+\[
+out = \overline{X_1 X_2 X_3}
+     = \overline{(\overline{AB})(\overline{CD})(\overline{EF})}
+     = ABCDEF.
+\]
+
+Thus, three 2-input NAND gates followed by one 3-input NAND realize the 6-input AND function.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{6_input_AND_using_2_input_NAND.eps}
+\caption{AND Implementation-C: 6-input AND using 2-input NAND and 3-input NAND decomposition.}
+\label{fig:and_impl_c}
+\end{figure}
+
+\subsection{OR Implementation-A (6-input NOR + Inverter)}
+
+A single 6-input NOR gate is used:
+\[
+X = \overline{A + B + C + D + E + F}.
+\]
+
+The output is then inverted:
+\[
+out = \overline{X}
+     = \overline{\overline{A + B + C + D + E + F}}
+\]
+\[
+= A + B + C + D + E + F.
+\]
+
+Thus, a 6-input NOR followed by an inverter
+realizes the 6-input OR function.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{6_input_OR_gate.eps}
+\caption{OR Implementation-A: 6-input OR using 6-input NOR followed by an inverter.}
+\label{fig:or_impl_a}
+\end{figure}
+
+\subsection{OR Implementation-B (3-input NOR + 2-input NOR)}
+
+Inputs are grouped into two 3-input NOR gates:
+\[
+X_1 = \overline{A + B + C}, \qquad
+X_2 = \overline{D + E + F}.
+\]
+
+The final stage is a 2-input NOR:
+\[
+out = \overline{X_1 + X_2}
+     = \overline{(\overline{A + B + C}) + (\overline{D + E + F})} \]
+\[     = A + B + C + D + E + F.
+\]
+
+Thus, two 3-input NOR gates followed by one 2-input NOR realize the 6-input OR function.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{6_input_OR_using_3_input_OR.eps}
+\caption{OR Implementation-B: 6-input OR using 3-input NOR and 2-input NOR decomposition.}
+\label{fig:or_impl_b}
+\end{figure}
+
+\subsection{OR Implementation-C (2-input NOR + 3-input NOR)}
+
+Inputs are first paired using three 2-input NOR gates:
+\[
+X_1 = \overline{A + B}, \qquad
+X_2 = \overline{C + D}, \qquad
+X_3 = \overline{E + F}.
+\]
+
+The final stage is a 3-input NOR:
+\[
+out = \overline{X_1 + X_2 + X_3}
+     = \overline{(\overline{A + B}) + (\overline{C + D}) + (\overline{E + F})}
+\]
+\[
+= A + B + C + D + E + F.
+\]
+
+
+Thus, three 2-input NOR gates followed by one 3-input NOR
+realize the 6-input OR function.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\columnwidth]{6_input_OR_using_2_input_OR.eps}
+\caption{OR Implementation-C: 6-input OR using 2-input NOR and 3-input NOR decomposition.}
+\label{fig:or_impl_c}
+\end{figure}
+
+\section{Area, Delay and Power Comparison}
+
+Table~\ref{tab:delay_power_3col} compares the area (transistor count), average delay, and power for all six implementations of the 6-input AND/OR gate.
+
+\begin{table}[h]
+\centering
+\caption{Delay and Power Comparison for All 6 Implementations}
+\label{tab:delay_power_3col}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Metric} & \textbf{Avg Delay (ps)} & \textbf{Power ($\mu$W)} \\
+\hline
+AND-A & 88.64 & 2.154 \\
+\hline
+AND-B & 84.51 & 2.625 \\
+\hline
+AND-C & 92.10 & 3.747 \\
+\hline
+OR-A & 85.19 & 3.159 \\
+\hline
+OR-B & 83.10 & 2.871 \\
+\hline
+OR-C & 82.80 & 3.312 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{fig1a_delay_comparison.png}
+    \caption{Graphical Representation of Delay for each configuration}
+    \label{question1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{fig1b_power_comparison.png}
+    \caption{Graphical Representation of Power for each configuration}
+    \label{question1}
+\end{figure}
+
+\noindent\textbf{Discussion:} The transistor count is used as an approximate measure of area, since CMOS gate area is directly proportional to the number of transistors. Implementation-A uses fewer gates, therefore it requires fewer transistors compared to multi-stage decompositions.
+
+The average delay is mainly influenced by the tradeoff between \textit{transistor stacking} and \textit{logic depth}. Although Implementation-A has fewer stages, it contains a larger series stack, which increases the effective resistance and hence the propagation delay. In Implementation-B and Implementation-C, the stack height is reduced by using smaller NAND/NOR gates, but the delay may increase due to additional intermediate stages.
+
+Power consumption depends on switching activity and the presence of internal switching nodes. Multi-stage implementations generally show higher power due to extra internal node transitions, which increase dynamic power even though the output load capacitance is fixed at 1~fF. Therefore, the reported results demonstrate the practical tradeoff between area, delay, and power in different CMOS logic decompositions.
+
+\section{Changing of Switching Activity}
+
+In this experiment, the switching activity is kept 0.5 and 0.125 for one input each while the other inputs have an switching activity between the two. The input transitions for each input can be seen in Table~\ref{tab:transition_q2}. The resulting average delay and dynamic power for all six implementations are summarized in Table~\ref{tab:delay_power_q2}.
+
+\begin{table}[h]
+\centering
+\caption{Input Transition Table}
+\label{tab:transition_q2}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Input} & \textbf{T0} & \textbf{T1} & \textbf{T2} & \textbf{T3} & \textbf{T4} & \textbf{T5} & \textbf{T6} & \textbf{T7} \\
+\hline
+A & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 \\
+\hline
+B & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 \\
+\hline
+C & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 \\
+\hline
+D & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 \\
+\hline
+E & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 \\
+\hline
+F & 0 & 1 & 0 & 1 & 0 & 1 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[h]
+\centering
+\caption{Delay, Power and PDP Comparison for All 6 Implementations}
+\label{tab:delay_power_q2}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Metric} & \textbf{Avg Delay (ps)} & \textbf{Power ($\mu$W)} & \textbf{PDP (fJ)} \\
+\hline
+AND-A & 159   & 1.971 & 313.389 \\
+\hline
+AND-B & 140.4 & 2.521 & 353.948 \\
+\hline
+AND-C & 164.3 & 3.527 & 579.486 \\
+\hline
+OR-A  & 84.35 & 3.069 & 258.867 \\
+\hline
+OR-B  & 84.05 & 2.77  & 232.819 \\
+\hline
+OR-C  & 85.5  & 3.084 & 263.682 \\
+\hline
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Discussion:} 
+One input is assigned a high switching activity ($\alpha = 0.5$), another is assigned a low switching activity ($\alpha = 0.125$), while the remaining inputs have intermediate transition rates. Since dynamic power in CMOS circuits is given by
+\[P_{dyn} = \alpha C_L V_{DD}^{2} f,\]
+power consumption is directly proportional to the switching activity factor $\alpha$.
+
+From Table~\ref{tab:delay_power_q2}, it is observed that delay values increase compared to the previous case. This is because non-uniform input transitions create different effective input arrival patterns, which affect the internal charging and discharging paths. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{fig3_pdp_only.png}
+    \caption {Power-Delay Product(PDP) with Non-uniform Switching Activity}
+    \label{question1}
+\end{figure}
+
+\section{Effect of Input Rise/Fall Time Variation}
+
+In this experiment, the rise/fall time of one selected input is increased to 500~ps while keeping all other inputs identical. The resulting average delay and dynamic power for all six implementations are summarized in Table~\ref{tab:risefall_500ps_3col}.
+
+\begin{table}[h]
+\centering
+\caption{Effect of Input Rise/Fall Time (Selected Input = 500~ps)}
+\label{tab:risefall_500ps_3col}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Metric} & \textbf{Avg Delay (ps)} & \textbf{Power ($\mu$W)} \\
+\hline
+AND-A & 200.86 & 2.615 \\
+\hline
+AND-B & 212.55 & 3.071 \\
+\hline
+AND-C & 232.94 & 4.282 \\
+\hline
+OR-A & 213.93 & 4.473 \\
+\hline
+OR-B & 224.06 & 3.344 \\
+\hline
+OR-C & 227.06 & 3.541 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{fig4a_rise_fall_delay.png}
+    \caption{Effect of Input Rise/Fall Time on Delay}
+    \label{question1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{fig4b_rise_fall_power.png}
+    \caption {Rise/Fall Time Effect on Power}
+    \label{question1}
+\end{figure}
+
+\noindent\textbf{Discussion:} From Table~\ref{tab:risefall_500ps_3col}, it is observed that increasing the rise/fall time of one input to 500~ps increases the average propagation delay for all implementations. This occurs because slower input transitions reduce the effective drive strength during switching, causing the output node to charge/discharge more slowly through the pull-up/pull-down networks.
+
+Among the AND implementations, AND-A shows the lowest delay (200.86~ps), while AND-C shows the highest delay (232.94~ps). This trend is mainly due to the increased logic depth and additional internal stages in the decomposed structures, which contribute extra propagation delay when the input transition becomes slow. A similar trend is observed for the OR implementations, where OR-A provides lower delay compared to OR-B and OR-C.
+
+The power results show that implementations with higher transistor count and more internal switching nodes consume higher dynamic power. In particular, AND-C and OR-A show the highest power consumption (4.282~$\mu$W and 4.473~$\mu$W respectively), which is attributed to increased internal node transitions and longer short-circuit current duration caused by slow input edges. Overall, the results demonstrate that slower rise/fall times degrade delay performance and may also increase power due to increased short-circuit and internal switching effects.
+
+\section{Leakage Power Estimation (Implementation-A)}
+
+Leakage power is estimated for Implementation-A (6-input NAND/NOR followed by an inverter) for the specified input vectors. The measured leakage values are reported in Table~\ref{tab:leakage_implA_3col}.
+
+\begin{table}[h]
+\centering
+\caption{Leakage Power for Implementation-A Under Different Input Vectors}
+\label{tab:leakage_implA_3col}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Input Vector} & \textbf{AND-A Leakage (pW)} & \textbf{OR-A Leakage (pW)} \\
+\hline
+000000 & 20.12 & 73.12 \\
+\hline
+000001 & 20.23 & 91.23 \\
+\hline
+000011 & 20.52 & 38.32 \\
+\hline
+000111 & 21.46 & 27.64 \\
+\hline
+001111 & 24.19 & 23.45 \\
+\hline
+011111 & 42.34 & 21.27 \\
+\hline
+111111 & 94.38 & 19.89 \\
+\hline
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Discussion:} From Table~\ref{tab:leakage_implA_3col}, it is observed that leakage power strongly depends on the applied input vector due to the \textit{stacking effect} in series-connected MOS transistors. For AND-A (6-input NAND + inverter), the leakage increases significantly as the input vector moves from 000000 to 111111. This occurs because more NMOS devices in the pull-down stack become ON, reducing the number of OFF stacked transistors and hence reducing the stack-induced leakage suppression. Therefore, the worst-case leakage for AND-A occurs near the all-ones condition (111111).\\
+For OR-A (6-input NOR + inverter), the opposite trend is observed. Leakage is maximum for 000000 and decreases as the input vector approaches 111111. This is because in a NOR gate the PMOS pull-up network is series-connected, and the leakage is higher when more PMOS devices are ON (or fewer OFF devices are stacked). As more inputs become 1, more PMOS devices turn OFF, increasing the stack effect and reducing leakage. Hence, the minimum leakage for OR-A occurs at 111111.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{fig5_combined_leakage.png}
+    \caption {Comparison plot of leakage power with respect to input vector patterns for implementation-A}
+    \label{question1}
+\end{figure}
+
+\section{Effect of High-Activity Input Position on Power (Implementation-A)}
+
+In this experiment, the input having the highest switching activity is moved from the top of the transistor stack to the bottom in Implementation-A (6-input NAND/NOR followed by an inverter). The measured average power for each position is reported in Table~\ref{tab:q4_position_power}.
+
+\begin{table}[h]
+\centering
+\caption{Effect of High-Activity Input Position on Power (Implementation-A)}
+\label{tab:q4_position_power}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Position of High-Activity Input} & \textbf{OR-A ($\mu$W)} & \textbf{AND-A (nW)} \\
+\hline
+Top (Near Output) & 1.945 & 563.0 \\
+\hline
+2nd & 2.534 & 97.47 \\
+\hline
+3rd & 3.490 & 227.9 \\
+\hline
+4th & 4.389 & 378.7 \\
+\hline
+5th & 5.261 & 557.6 \\
+\hline
+Bottom & 5.427 & 780.8 \\
+\hline
+\end{tabular}
+\end{table}
+
+\noindent\textbf{Discussion:} From Table~\ref{tab:q4_position_power}, it is observed that the average power changes significantly when the highest-activity input is moved along the transistor stack. This behavior occurs because the input position modifies the effective internal node switching and the short-circuit current contribution during transitions. When the high-activity transistor is placed closer to the bottom of the stack, more internal nodes experience charging/discharging and the effective stack shielding is reduced, resulting in higher dynamic power. Conversely, placing the high-activity input closer to the top reduces unnecessary internal transitions and hence lowers the overall power. Therefore, input ordering in large-stack CMOS gates is an important low-power optimization technique.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{fig6_combined_position.png}
+    \caption {Comparison plot of power consumption with respect to different input position with highest activity}
+    \label{question1}
+\end{figure}
+
+\end{document}
+
